@@ -1,0 +1,7 @@
+Branch,Particle,Description
+decay_length,Parent,Example parent decay length
+pointing_cos,Parent,Example parent pointing cosine
+daughter_a_pt,DaughterA,Example first daughter transverse momentum
+daughter_a_ip,DaughterA,Example first daughter impact parameter
+daughter_b_pt,DaughterB,Example second daughter transverse momentum
+daughter_b_ip,DaughterB,Example second daughter impact parameter

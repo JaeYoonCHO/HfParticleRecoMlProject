@@ -1,0 +1,2 @@
+epoch,split,loss,acc,auc,num_samples,epoch_time_sec,score_threshold,num_signal,num_background,selected_signal,selected_background,purity,signal_efficiency,background_efficiency,background_rejection
+3,test,0.49277423322200775,0.8203125,0.889892578125,128,0.004522562026977539,0.85,64,64,0,0,,0.0,0.0,1.0

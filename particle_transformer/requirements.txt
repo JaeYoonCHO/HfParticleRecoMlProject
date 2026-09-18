@@ -1,0 +1,8 @@
+# Versions used for local validation (Python 3.12).
+torch==2.11.0
+numpy==2.4.6
+pandas==3.0.3
+scikit-learn==1.8.0
+PyYAML==6.0.3
+uproot==5.7.4
+tqdm==4.67.3

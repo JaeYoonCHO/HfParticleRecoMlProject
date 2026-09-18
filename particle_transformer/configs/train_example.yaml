@@ -1,0 +1,62 @@
+# Run commands from the repository root. All paths below are relative to it.
+paths:
+  train_csv: data/train.root  # Historical key name; input format is ROOT.
+  val_csv: data/val.root
+  test_csv: data/test.root
+  particle_columns_file: examples/Particle_name.csv
+  stats_save_path: outputs/example/standardization.pt
+  stats_signal_path: null
+  stats_background_path: null
+
+particles:
+  parent: {particle: Parent}
+  daughter_a: {particle: DaughterA}
+  daughter_b: {particle: DaughterB}
+
+data:
+  tree_name: DecayCandidates
+  label_column: isSignal
+  batch_size: 64
+  num_workers: 0
+  pin_memory: false
+  drop_last: false
+
+model:
+  embed_dim: 32
+  num_heads: 4
+  num_layers: 2
+  ff_dim: 64
+  dropout: 0.1
+  num_classes: 2
+  head_hidden_dim: 32
+  use_final_norm: true
+  use_positional_encoding: false
+
+metrics:
+  # score threshold used for purity and signal/background efficiencies.
+  score_threshold: 0.85
+# training_history.csv rows: train=model.train() while updating weights; val=model.eval() on validation; train_eval=model.eval() on all training rows after the epoch.
+
+train:
+  seed: 42
+  device: cpu
+  epochs: 3
+  learning_rate: 0.001
+  weight_decay: 0.0001
+
+resume:
+  enabled: false
+  checkpoint_path: outputs/example/final_checkpoint.pt
+
+scheduler:
+  use_scheduler: false
+  step_size: 10
+  gamma: 0.5
+
+save:
+  save_dir: outputs/example
+  best_model_name: best_model.pt
+  final_model_name: final_model.pt
+
+log:
+  print_every: 1

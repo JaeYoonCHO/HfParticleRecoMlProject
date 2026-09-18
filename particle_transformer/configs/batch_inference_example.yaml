@@ -1,0 +1,48 @@
+# Optional AO2D-style input: trees under DF_* directories, split by fPt.
+input:
+  path_template: data/input_{i}.root
+  index_start: 1
+  index_end: 1
+  tree_name: DecayCandidates
+  df_prefix: DF_
+
+output:
+  dir: outputs/batch_example
+  branches: [event_id, fPt, isSignal]
+  score_branch: signal_score
+
+paths:
+  particle_columns_file: examples/Particle_name.csv
+
+particles:
+  parent: {particle: Parent}
+  daughter_a: {particle: DaughterA}
+  daughter_b: {particle: DaughterB}
+
+model:
+  embed_dim: 32
+  num_heads: 4
+  num_layers: 2
+  ff_dim: 64
+  dropout: 0.1
+  num_classes: 2
+  head_hidden_dim: 32
+  use_final_norm: true
+  use_positional_encoding: false
+
+pt_bins:
+  - name: example
+    pt_min: 0.0
+    pt_max: 20.0
+    stats_path: outputs/example/standardization.pt
+    model_path: outputs/example/best_model.pt
+
+# Labelled training computes AUC, purity, and efficiencies; batch inference writes scores only.
+run:
+  device: cpu
+  batch_size: 64
+  precision: fp32
+  chunk_rows: 100
+  flush_rows: 100
+  max_dfs_per_file: null
+  max_rows_per_file: null

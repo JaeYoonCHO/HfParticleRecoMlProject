@@ -1,0 +1,35 @@
+# Must use the same token/feature order and model settings as training.
+paths:
+  particle_columns_file: examples/Particle_name.csv
+  stats_save_path: outputs/example/standardization.pt
+
+particles:
+  parent: {particle: Parent}
+  daughter_a: {particle: DaughterA}
+  daughter_b: {particle: DaughterB}
+
+data:
+# train_eval and val are written by train.py; inference scripts write scores only.
+  batch_size: 64
+
+model:
+  embed_dim: 32
+  num_heads: 4
+  num_layers: 2
+  ff_dim: 64
+  dropout: 0.1
+  num_classes: 2
+  head_hidden_dim: 32
+  use_final_norm: true
+  use_positional_encoding: false
+  model_path: outputs/example/best_model.pt
+
+train:
+  device: cpu
+
+dataset:
+  input_root: data/test.root
+  output_root: outputs/example/scored.root
+  tree_name: DecayCandidates
+  output_branches: [event_id, fPt, isSignal]
+  score_branch: signal_score
